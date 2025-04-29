@@ -1,13 +1,601 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nature-green: #A8CF8F;
+  --sun-yellow: #FEEA8A;
+  --sky-blue: #A1D2E6;
+  --earth-gray: #C0B5A2;
+  --cta-orange: #F3A15F;
+  --path-purple: #C8A2C8;
+  --highlight-teal: #7BDFF2;
+  --soft-pink: #F9D5E5;
+  --leaf-green: #87C38F;
+  --mountain-brown: #C8B199;
+  --water-blue: #B4DDE3;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f8f2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-opacity='0.05'%3E%3Ccircle fill='%23000000' cx='50' cy='50' r='50'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100px 100px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* 确保所有中文文本使用Noto Sans TC字体 */
+[lang="zh-TW"], 
+[lang="zh"], 
+.zh, 
+:lang(zh) {
+  font-family: 'Noto Sans TC', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+/* 标题中的中文文本也使用Noto Sans TC */
+h1[lang="zh-TW"], 
+h2[lang="zh-TW"], 
+h3[lang="zh-TW"], 
+h4[lang="zh-TW"], 
+h5[lang="zh-TW"], 
+h6[lang="zh-TW"],
+h1 .zh, 
+h2 .zh, 
+h3 .zh, 
+h4 .zh, 
+h5 .zh, 
+h6 .zh {
+  font-family: 'Noto Sans TC', sans-serif !important;
+}
+
+.watercolor-bg {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="watercolor" x="0" y="0"><feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" /></filter></defs><rect width="100%" height="100%" filter="url(%23watercolor)" fill="%23f8f8f2" opacity="0.3" /></svg>');
+}
+
+.paper-texture {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="paper" x="0" y="0"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" stitchTiles="stitch" result="noise" /><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.3 0" in="noise" result="papernoise" /><feBlend in="SourceGraphic" in2="papernoise" mode="multiply" /></filter><rect width="100%" height="100%" filter="url(%23paper)" fill="%23ffffff" /></svg>');
+}
+
+.hand-drawn {
+  border: none;
+  outline: none;
+}
+
+/* 水彩暈染風格卡片 - 不規則形狀無邊框設計 */
+.hand-drawn-card {
+  position: relative;
+  overflow: visible;
+  background: none;
+  box-shadow: none;
+  border: none;
+  padding: 1rem;
+  z-index: 1;
+}
+
+.hand-drawn-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 62% 38% 53% 47% / 45% 42% 58% 55%;
+  transform: scale(1.02) rotate(-0.5deg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="blobcard"><feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G" /></filter></svg>#blobcard');
+  z-index: -1;
+}
+
+.hand-drawn-card::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background: inherit;
+  opacity: 0.07;
+  border-radius: 62% 38% 63% 37% / 41% 44% 56% 59%; 
+  transform: scale(1.03) rotate(0.8deg);
+  filter: blur(12px);
+  z-index: -2;
+}
+
+/* 水彩暈染按鈕 - 不規則形狀無邊框設計 */
+.hand-drawn-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  color: #333;
+  font-weight: 500;
+  overflow: visible;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: none;
+  z-index: 1;
+}
+
+.hand-drawn-btn::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  opacity: 0.15;
+  background: inherit;
+  border-radius: 76% 24% 58% 42% / 54% 36% 64% 46%;
+  z-index: -2;
+  transform: translate(3px, -3px) scale(1.05);
+  filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.hand-drawn-btn:hover {
+  transform: translateY(-2px) rotate(0.5deg);
+}
+
+.hand-drawn-btn:hover::before {
+  transform: translate(-2px, 2px) scale(1.03);
+}
+
+.hand-drawn-btn:hover::after {
+  opacity: 0.25;
+  filter: blur(10px);
+  transform: translate(4px, -4px) scale(1.07);
+}
+
+.hand-drawn-btn:active {
+  transform: translateY(1px) rotate(-0.5deg);
+}
+
+.hand-drawn-btn:active::before {
+  transform: translate(0px, 0px) scale(1);
+}
+
+.hand-drawn-btn:active::after {
+  opacity: 0.1;
+  transform: translate(1px, -1px) scale(1.02);
+}
+
+.hand-drawn-btn:focus {
+  outline: none;
+}
+
+/* 按鈕顏色變體 */
+.hand-drawn-btn.nature::before {
+  background-color: var(--nature-green);
+}
+
+.hand-drawn-btn.nature {
+  color: rgb(84, 69, 16);
+}
+
+.hand-drawn-btn.sun::before {
+  background-color: var(--sun-yellow);
+}
+
+.hand-drawn-btn.sun {
+  color: #333;
+}
+
+.hand-drawn-btn.water::before {
+  background-color: var(--sky-blue);
+}
+
+.hand-drawn-btn.water {
+  color: #333;
+}
+
+.hand-drawn-btn.earth::before {
+  background-color: var(--earth-gray);
+}
+
+.hand-drawn-btn.earth {
+  color: #333;
+}
+
+.hand-drawn-btn.cta::before {
+  background-color: var(--cta-orange);
+}
+
+.hand-drawn-btn.cta {
+  color: #333;
+}
+
+.watercolor-shape {
+  position: absolute;
+  border-radius: 50% 50% 50% 50% / 60% 40% 60% 40%;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+  border: none;
+}
+
+.watercolor-shape.green {
+  background: var(--nature-green);
+  filter: blur(30px);
+}
+
+.watercolor-shape.blue {
+  background: var(--sky-blue);
+  filter: blur(35px);
+}
+
+.watercolor-shape.yellow {
+  background: var(--sun-yellow);
+  filter: blur(25px);
+}
+
+.watercolor-shape.orange {
+  background: var(--cta-orange);
+  filter: blur(40px);
+}
+
+/* 手繪圖標容器 - 不規則形狀無邊框設計 */
+.hand-drawn-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  overflow: visible;
+  border: none;
+  z-index: 1;
+}
+
+.hand-drawn-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 55% 45% 50% 50% / 55% 45% 55% 45%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: rotate(-5deg);
+  z-index: -1;
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="blobicon"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" /></filter></svg>#blobicon');
+}
+
+.hand-drawn-icon::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: inherit;
+  opacity: 0.1;
+  border-radius: 60% 40% 55% 45% / 50% 50% 50% 50%;
+  filter: blur(8px);
+  transform: rotate(3deg);
+  z-index: -2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.hover-effect {
+  transition: all 0.3s ease;
+}
+
+.map-point {
+  transition: all 0.3s ease;
+}
+.map-point:hover {
+  stroke-width: 3px;
+  opacity: 0.8;
+}
+
+.tooltip {
+  transition-delay: 100ms;
+}
+
+.hand-drawn-illustration {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: visible;
+  background: none;
+  border: none;
+  z-index: 1;
+}
+
+.hand-drawn-illustration::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 60% 70% 65% 75% / 70% 60% 75% 65%;
+  transform: rotate(-2deg) scale(1.05);
+  z-index: -1;
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="blobillustration"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G" /></filter></svg>#blobillustration');
+}
+
+.hand-drawn-illustration::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: inherit;
+  opacity: 0.15;
+  border-radius: 65% 75% 60% 70% / 75% 65% 70% 60%;
+  filter: blur(12px);
+  transform: rotate(3deg) scale(1.08);
+  z-index: -2;
+}
+
+.hand-drawn-illustration img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.mountain-illustration {
+  position: absolute;
+  width: 120px;
+  height: 80px;
+  opacity: 0.5;
+  z-index: 0;
+  border: none;
+}
+
+.mountain-illustration::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--mountain-brown);
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80"><path d="M10,70 L40,20 L60,45 L90,10 L110,70 Z" stroke="none" fill="%23333"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80"><path d="M10,70 L40,20 L60,45 L90,10 L110,70 Z" stroke="none" fill="%23333"/></svg>');
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="watercolormountain"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" /></filter></svg>#watercolormountain');
+  border: none;
+}
+
+.plant-illustration {
+  position: absolute;
+  width: 60px;
+  height: 100px;
+  opacity: 0.6;
+  z-index: 0;
+  border: none;
+}
+
+.plant-illustration::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--leaf-green);
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100"><path d="M30,90 C30,70 30,50 30,30 C20,40 15,35 10,20 C25,25 30,20 30,10 M30,30 C40,40 45,35 50,20 C35,25 30,20 30,10" stroke="none" fill="%23333"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100"><path d="M30,90 C30,70 30,50 30,30 C20,40 15,35 10,20 C25,25 30,20 30,10 M30,30 C40,40 45,35 50,20 C35,25 30,20 30,10" stroke="none" fill="%23333"/></svg>');
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="watercolorplant"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" /></filter></svg>#watercolorplant');
+  border: none;
+}
+
+.water-illustration {
+  position: absolute;
+  width: 150px;
+  height: 40px;
+  opacity: 0.4;
+  z-index: 0;
+  border: none;
+}
+
+.water-illustration::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--water-blue);
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 40"><path d="M0,20 C15,10 30,30 45,20 C60,10 75,30 90,20 C105,10 120,30 135,20 C150,10 165,30 180,20" stroke="none" fill="%23333"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 40"><path d="M0,20 C15,10 30,30 45,20 C60,10 75,30 90,20 C105,10 120,30 135,20 C150,10 165,30 180,20" stroke="none" fill="%23333"/></svg>');
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="watercolorwater"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" /></filter></svg>#watercolorwater');
+  border: none;
+}
+
+.trail-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  color: #333;
+  border: none;
+}
+
+.trail-badge.family {
+  background-color: var(--nature-green);
+  background-image: linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0));
+  border: none;
+}
+
+.trail-badge.hiking {
+  background-color: var(--path-purple);
+  background-image: linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0));
+  border: none;
+}
+
+/* 全局移除所有黑色邊框 */
+*, *::before, *::after {
+  border-color: transparent;
+}
+
+.hand-drawn-btn:focus, .hand-drawn-btn:hover {
+  outline: none;
+  border: none;
+}
+
+.hand-drawn-card:focus, .hand-drawn-card:hover {
+  outline: none;
+  border: none;
+}
+
+.hand-drawn-icon:focus, .hand-drawn-icon:hover {
+  outline: none;
+  border: none;
+}
+
+.hover-effect:hover {
+  border-width: 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 640px) {
+  .watercolor-shape {
+    opacity: 0.08; /* 在移動設備上降低不透明度 */
+  }
+  
+  .hand-drawn-card {
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .hand-drawn-btn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    border: none;
+  }
+}
+
+/* 路線樣式 - 不規則手繪風格 */
+.trail-path {
+  stroke: #4285f4;
+  stroke-width: 3px;
+  fill: none;
+  stroke-dasharray: 8 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="trailfilter"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G" /></filter></svg>#trailfilter');
+  animation: dash-animation 30s linear infinite;
+}
+
+@keyframes dash-animation {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+/* 路線標記樣式 */
+.trail-marker {
+  fill: #4285f4;
+  stroke: white;
+  stroke-width: 1px;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3)) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="markerfilter"><feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="1" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="1" xChannelSelector="R" yChannelSelector="G" /></filter></svg>#markerfilter');
+}
+
+/* 距離和時間標記 */
+.distance-time-marker {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.85rem;
+  font-weight: bold;
+  fill: #333;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.8));
+  transform-origin: center;
+  animation: none;
+}
+
+/* 標記樣式 - 手繪不規則風格 */
+.marker {
+  position: absolute;
+  cursor: pointer;
+  transform-origin: bottom center;
+  transition: transform 0.2s ease;
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="handdrawn"><feTurbulence type="fractalNoise" baseFrequency="0.15" numOctaves="1" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G" /></filter></svg>#handdrawn');
+}
+
+.marker:hover {
+  transform: scale(1.1) translateY(-3px);
+  z-index: 10;
+}
+
+.marker svg {
+  width: 30px;
+  height: 40px;
+  filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.3));
+}
+
+.marker-pulse {
+  animation: marker-pulse 2s ease-in-out infinite;
+}
+
+@keyframes marker-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* 標記視覺設計 */
+.marker-icon {
+  fill: #e74c3c;
+  stroke: #ffffff;
+  stroke-width: 1.5px;
+  transform-origin: center;
+}
+
+.marker-icon-attraction {
+  fill: #e74c3c;
+}
+
+.marker-icon-restaurant {
+  fill: #2ecc71;
+}
+
+.marker-icon-hotel {
+  fill: #3498db;
+}
+
+.marker-icon-shop {
+  fill: #f39c12;
+}
+
+/* 標記標籤樣式 */
+.marker-label {
+  position: absolute;
+  background: #fff;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 2px solid #333;
+  transform: translateY(-120%);
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }

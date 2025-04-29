@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -34,5 +37,129 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.hand-drawn-btn {
+  background-color: var(--sun-yellow);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+  padding: 8px 16px;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hand-drawn-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="1" /></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.1" /></svg>');
+  pointer-events: none;
+}
+
+.hand-drawn-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.hand-drawn-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.hand-drawn-card {
+  background-color: white;
+  border: 2px solid #333;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+}
+
+.hand-drawn-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="1" /></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.05" /></svg>');
+  pointer-events: none;
+}
+
+.watercolor-shape {
+  position: absolute;
+  opacity: 0.15;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.watercolor-shape.green {
+  background-color: var(--nature-green);
+}
+
+.watercolor-shape.blue {
+  background-color: var(--sky-blue);
+}
+
+.watercolor-shape.yellow {
+  background-color: var(--sun-yellow);
+}
+
+.map-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hand-drawn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: white;
+  border: 2px solid #333;
+  border-radius: 50%;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.trail-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.trail-badge.family {
+  background-color: var(--nature-green);
+  color: #333;
+}
+
+.trail-badge.hiking {
+  background-color: var(--cta-orange);
+  color: #333;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .map-container {
+    height: 60vh;
+  }
+}
+
+@media (max-width: 640px) {
+  .map-container {
+    height: 50vh;
   }
 }

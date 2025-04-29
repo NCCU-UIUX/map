@@ -1,8 +1,22 @@
 {
-  "name": "interactive-map-website",
-  "version": "0.1.0",
+  "name": "shenkeng-trails-map",
+  "version": "1.0.0",
   "private": true,
+  "description": "深坑步道互動式地圖導覽網站 | Interactive map for Shenkeng trails and attractions",
+  "keywords": [
+    "shenkeng",
+    "trails",
+    "interactive-map",
+    "react",
+    "google-maps"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NCCU-UIUX/map.git"
+  },
+  "homepage": "https://map-nccu-uiux.vercel.app",
   "dependencies": {
+    "@react-google-maps/api": "^2.20.6",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -11,6 +25,7 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "lucide-react": "^0.503.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "5.0.1",
@@ -40,5 +55,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5"
   }
 }
