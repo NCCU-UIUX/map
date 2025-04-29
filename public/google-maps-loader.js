@@ -10,15 +10,6 @@
     return;
   }
 
-  console.log('尝试使用备用方法加载Google Maps API...');
-  // 如果加载失败，我们将手动加载
-  // 注意: 实际项目中API密钥应该从环境变量获取
-  var script = document.createElement('script');
-  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAS7ZXOm1OOTFxfLbEF62Ljsf3nK2zDrVA&libraries=places&callback=googleMapsCallback';
-  script.async = true;
-  script.defer = true;
-  document.head.appendChild(script);
-
   // 回调函数
   window.googleMapsCallback = function() {
     console.log('Google Maps API 已成功加载（通过备用加载方式）');
