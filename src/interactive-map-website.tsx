@@ -29,6 +29,7 @@ interface Attraction {
   position: TrailCoordinate;
   familyFriendly: boolean;
   onTrail: number;
+  introduction?: { zh: string; en: string };
 }
 
 type LanguageKey = "zh" | "en";
@@ -68,7 +69,7 @@ export default function InteractiveMap() {
       url: "https://www.google.com/maps/dir/向天溪階梯/鎮南宮石媽祖古道/加爾默羅聖母聖衣隱修院",
       color: "var(--nature-green)", // 使用CSS变量
       familyFriendly: true,
-      difficulty: "简单",
+      difficulty: "簡單",
       distance: "3.8公里",
       time: "1小时30分钟",
       coordinates: [
@@ -111,6 +112,10 @@ export default function InteractiveMap() {
       position: { lat: 25.0, lng: 121.618 },
       familyFriendly: true,
       onTrail: 1,
+      introduction: {
+        zh: "向天溪階梯隱身於青翠山林間，溪水沿層層石階流瀉，形成如畫般的階梯水景。溪畔綠意盎然，並設有涼亭供遊客休憩，環境幽靜清新。漫步於潺潺水聲中，遠離城市喧囂，感受大自然的寧靜與療癒氣息，是放鬆身心的理想去處。",
+        en: "Xiangtian Creek Stairs is hidden amidst lush greenery, with water cascading gently over layers of stone steps, creating a picturesque \"staircase waterfall\" view. The creekside is surrounded by vibrant greenery and features pavilions for visitors to rest. The peaceful environment, accompanied by the soft sounds of flowing water, offers an escape from city noise, making it an ideal place to relax and refresh both body and mind."
+      }
     },
     {
       id: 2,
@@ -123,6 +128,10 @@ export default function InteractiveMap() {
       position: { lat: 24.997, lng: 121.621 },
       familyFriendly: true,
       onTrail: 1,
+      introduction: {
+        zh: "石媽祖步道入口在阿柔洋產業道路約 450公尺處，步道終點為鎮南宮石媽祖廟，沿路兩側桂花樹撲鼻，風景優美，步行來回約 30 分鐘，適合親子健行。",
+        en: "The entrance to the Shi Mazu Trail is located about 450 meters along the Arouyang Industrial Road. The trail leads to the Zhen Nan Shi Mazu Temple. Along the path, osmanthus trees line both sides, filling the air with their fragrance. The beautiful scenery and the easy 30-minute round-trip walk make it ideal for family hiking."
+      }
     },
     {
       id: 3,
