@@ -34,9 +34,9 @@ const FallbackMapComponent: React.FC<FallbackMapProps> = ({ language }) => {
           <div className="text-lg text-gray-800 flex items-center">
             <Map className="w-5 h-5 mr-2 text-nature-green" />
             {language === "zh" ? (
-              <span lang="zh-TW">阿里山秘境小旅行</span>
+              <span lang="zh-TW">深坑地圖</span>
             ) : (
-              "Alishan Secret Tour Map"
+              "Shenkeng Map"
             )}
           </div>
 
@@ -71,11 +71,7 @@ const FallbackMapComponent: React.FC<FallbackMapProps> = ({ language }) => {
         >
           <img
             src={mapImageUrl}
-            alt={
-              language === "zh"
-                ? "阿里山秘境小旅行地圖"
-                : "Alishan Secret Tour Map"
-            }
+            alt={language === "zh" ? "深坑地圖" : "Tour Map"}
             className="max-w-full max-h-full object-contain"
           />
         </div>
@@ -85,14 +81,14 @@ const FallbackMapComponent: React.FC<FallbackMapProps> = ({ language }) => {
       <div className="absolute bottom-0 left-0 right-0 bg-earth-gray bg-opacity-20 p-3 text-sm text-gray-800">
         <div className="font-title">
           {language === "zh" ? (
-            <span lang="zh-TW">阿里山秘境小旅行</span>
+            <span lang="zh-TW">深坑地圖</span>
           ) : (
-            "Alishan Secret Tour Map"
+            "Shenkeng Map"
           )}
         </div>
         <div className="text-xs text-gray-600">
           {language === "zh" ? (
-            <span lang="zh-TW">包含茶園、森林步道等景點</span>
+            <span lang="zh-TW">包含茶園、步道等景點</span>
           ) : (
             "Includes tea gardens, forest trails and attractions"
           )}
