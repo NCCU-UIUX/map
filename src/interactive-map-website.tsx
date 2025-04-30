@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Map, Coffee, Users, Home, Waves, Mountain, Trees } from "lucide-react";
+import { Map, Coffee, Users, Home, Waves, Mountain, Trees, X } from "lucide-react";
 import FallbackMapComponent from "./components/FallbackMapComponent";
 import EmbeddedGoogleMapComponent from "./components/EmbeddedGoogleMapComponent";
 
@@ -44,6 +44,7 @@ export default function InteractiveMap() {
   // const [activeTooltip, setActiveTooltip] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [useEmbeddedMap, setUseEmbeddedMap] = useState(true); // 更改為默認顯示嵌入式地圖
+  const [selectedAttraction, setSelectedAttraction] = useState<Attraction | null>(null); // 選中的景點
 
   useEffect(() => {
     // 模拟加载
@@ -144,6 +145,10 @@ export default function InteractiveMap() {
       position: { lat: 24.995, lng: 121.625 },
       familyFriendly: true,
       onTrail: 1,
+      introduction: {
+        zh: "位在寧靜的深山中的加爾默羅聖母聖衣隱修院，為天主教最嚴格的隱修院之一。在靜默中祈禱，隱修女度著靜默生活，終身奉獻，祈禱刻苦、也透過彼此相互祈禱，使她們之間的生命更加緊密地連結在一起。",
+        en: "Nestled deep in the mountains, the Carmelite Monastery of Our Lady of Mount Carmel is one of the strictest Catholic cloistered convents. The nuns live a life of silence and prayer, dedicating their entire lives to spiritual devotion. Through continuous prayer and mutual spiritual support, their lives become deeply intertwined in faith."
+      }
     },
     {
       id: 4,
@@ -662,12 +667,13 @@ export default function InteractiveMap() {
               .map((attraction) => (
                 <div
                   key={attraction.id}
-                  className="hand-drawn-card p-4 flex items-center hover-effect paper-texture"
+                  className="hand-drawn-card p-4 flex items-center hover-effect paper-texture cursor-pointer"
                   style={{
                     borderRadius: "16px 14px 18px 14px / 14px 18px 14px 16px",
                   }}
                   onMouseEnter={() => handleAttractionHover(attraction.id)}
                   onMouseLeave={handleAttractionLeave}
+                  onClick={() => setSelectedAttraction(attraction)}
                 >
                   <div className="hand-drawn-icon mr-4 overflow-visible">
                     {attraction.icon}
@@ -976,6 +982,83 @@ export default function InteractiveMap() {
           </div>
         </div>
       </footer>
+
+      {/* 景點詳情模態對話框 */}
+      {selectedAttraction && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div 
+            className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto paper-texture hand-drawn-card"
+            style={{
+              borderRadius: "20px 18px 22px 16px / 16px 20px 18px 22px",
+            }}
+          >
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <h2 className="text-2xl font-title font-bold">
+                  {language === "zh" ? (
+                    <span lang="zh-TW">{selectedAttraction.name.zh}</span>
+                  ) : (
+                    selectedAttraction.name.en
+                  )}
+                </h2>
+                <button 
+                  onClick={() => setSelectedAttraction(null)}
+                  className="p-1 hover:bg-gray-100 rounded-full"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              
+              <div className="flex items-center mb-4">
+                <div className="hand-drawn-icon mr-3 overflow-visible">
+                  {selectedAttraction.icon}
+                </div>
+                <span className="text-gray-600">
+                  {selectedAttraction.type === "temple" ? (
+                    language === "zh" ? <span lang="zh-TW">寺廟</span> : "Temple"
+                  ) : selectedAttraction.type === "trail" ? (
+                    language === "zh" ? <span lang="zh-TW">步道</span> : "Trail"
+                  ) : selectedAttraction.type === "mountain" ? (
+                    language === "zh" ? <span lang="zh-TW">山岳</span> : "Mountain"
+                  ) : selectedAttraction.type === "rest" ? (
+                    language === "zh" ? <span lang="zh-TW">休息區</span> : "Rest Area"
+                  ) : selectedAttraction.type === "stairs" ? (
+                    language === "zh" ? <span lang="zh-TW">階梯</span> : "Stairs"
+                  ) : selectedAttraction.type === "monastery" ? (
+                    language === "zh" ? <span lang="zh-TW">修道院</span> : "Monastery"
+                  ) : (
+                    ""
+                  )}
+                </span>
+              </div>
+
+              {selectedAttraction.introduction && (
+                <div className="mt-4">
+                  <h3 className="text-lg font-semibold mb-2">
+                    {language === "zh" ? <span lang="zh-TW">介紹</span> : "Introduction"}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {language === "zh" ? (
+                      <span lang="zh-TW">{selectedAttraction.introduction.zh}</span>
+                    ) : (
+                      selectedAttraction.introduction.en
+                    )}
+                  </p>
+                </div>
+              )}
+
+              <div className="mt-6 flex justify-end">
+                <button 
+                  onClick={() => setSelectedAttraction(null)}
+                  className="hand-drawn-btn px-4 py-2 bg-cta-orange text-white"
+                >
+                  {language === "zh" ? <span lang="zh-TW">關閉</span> : "Close"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
