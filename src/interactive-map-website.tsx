@@ -68,9 +68,9 @@ export default function InteractiveMap() {
       url: "https://www.google.com/maps/dir/向天溪階梯/鎮南宮石媽祖古道/加爾默羅聖母聖衣隱修院",
       color: "var(--nature-green)", // 使用CSS变量
       familyFriendly: true,
-      difficulty: "简单",
+      difficulty: "簡單",
       distance: "3.8公里",
-      time: "1小时30分钟",
+      time: "1小時30分鐘",
       coordinates: [
         { lat: 25.0, lng: 121.618 }, // 向天溪階梯
         { lat: 24.997, lng: 121.621 }, // 鎮南宮石媽祖古道
@@ -88,7 +88,7 @@ export default function InteractiveMap() {
       familyFriendly: false,
       difficulty: "中等",
       distance: "9公里",
-      time: "2小时37分钟",
+      time: "2小時37分鐘",
       coordinates: [
         { lat: 25.005, lng: 121.615 }, // 大崎嶺步道
         { lat: 25.0, lng: 121.618 }, // 向天溪階梯
