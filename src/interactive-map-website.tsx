@@ -11,7 +11,6 @@ import {
   Mountain,
   Trees,
 } from "lucide-react";
-import GoogleMapComponent from "./components/GoogleMapComponent";
 import FallbackMapComponent from "./components/FallbackMapComponent";
 import EmbeddedGoogleMapComponent from "./components/EmbeddedGoogleMapComponent";
 
@@ -52,7 +51,6 @@ export default function InteractiveMap() {
   const [showFamilyFriendly, setShowFamilyFriendly] = useState(false);
   const [showTrailsOnly, setShowTrailsOnly] = useState(false);
   const [activeTooltip, setActiveTooltip] = useState<number | null>(null);
-  const [useFallbackMap, setUseFallbackMap] = useState(true); // 默认使用简易地图
   const [isLoading, setIsLoading] = useState(true);
   const [useEmbeddedMap, setUseEmbeddedMap] = useState(true); // 更改為默認顯示嵌入式地圖
 
@@ -248,7 +246,7 @@ export default function InteractiveMap() {
   // 检查Google Maps API是否可用
   const checkGoogleMapsApi = () => {
     if (window.google && window.google.maps) {
-      setUseFallbackMap(false);
+      setUseEmbeddedMap(false);
     }
   };
 
@@ -406,14 +404,12 @@ export default function InteractiveMap() {
             </div>
           ) : useEmbeddedMap ? (
             <EmbeddedGoogleMapComponent language={language} />
-          ) : useFallbackMap ? (
+          ) : (
             <FallbackMapComponent
               language={language}
               center={mapCenter}
               zoom={mapZoom}
             />
-          ) : (
-            <GoogleMapComponent center={mapCenter} zoom={mapZoom} />
           )}
         </div>
 
