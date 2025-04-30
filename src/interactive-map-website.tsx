@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+
 import { Map, Coffee, Users, Home, Waves, Mountain, Trees } from "lucide-react";
+
 import FallbackMapComponent from "./components/FallbackMapComponent";
 import EmbeddedGoogleMapComponent from "./components/EmbeddedGoogleMapComponent";
 
@@ -39,8 +41,7 @@ export default function InteractiveMap() {
   const [language, setLanguage] = useState<LanguageKey>("zh"); // 'zh' 中文, 'en' 英文
   const [showFamilyFriendly, setShowFamilyFriendly] = useState(false);
   const [showTrailsOnly, setShowTrailsOnly] = useState(false);
-  // 暂时注释掉，但保留，因为这个状态可能在将来会使用
-  // const [activeTooltip, setActiveTooltip] = useState<number | null>(null);
+
   const [isLoading, setIsLoading] = useState(true);
   const [useEmbeddedMap, setUseEmbeddedMap] = useState(true); // 更改為默認顯示嵌入式地圖
 
