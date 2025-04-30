@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 interface EmbeddedGoogleMapProps {
   language: "zh" | "en";
@@ -13,7 +13,7 @@ const EmbeddedGoogleMapComponent: React.FC<EmbeddedGoogleMapProps> = ({
 }) => {
   // Google地圖嵌入URL - 更新為包含ehbc參數的完整URL
   const mapUrl =
-    "https://www.google.com/maps/d/embed?mid=12Sm7DMQB4uIFyuD7wug7vRSdtpOALfU&ehbc=2E312F";
+    "https://www.google.com/maps/d/u/0/embed?mid=12Sm7DMQB4uIFyuD7wug7vRSdtpOALfU&ehbc=2E312F";
 
   // 添加加載狀態
   const [isLoading, setIsLoading] = useState(true);

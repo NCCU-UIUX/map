@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Map, Flag, Coffee, Home, Waves, Mountain, Trees } from "lucide-react";
 
 interface FallbackMapProps {
@@ -38,21 +38,25 @@ const FallbackMapComponent: React.FC<FallbackMapProps> = ({
     }
   };
 
-  const handleMouseMove = (e: MouseEvent | TouchEvent) => {
-    if (!isDragging) return;
+  // 使用useCallback包裹handleMouseMove函数
+  const handleMouseMove = useCallback(
+    (e: MouseEvent | TouchEvent) => {
+      if (!isDragging) return;
 
-    if ("touches" in e) {
-      setPosition({
-        x: e.touches[0].clientX - startPosition.x,
-        y: e.touches[0].clientY - startPosition.y,
-      });
-    } else {
-      setPosition({
-        x: e.clientX - startPosition.x,
-        y: e.clientY - startPosition.y,
-      });
-    }
-  };
+      if ("touches" in e) {
+        setPosition({
+          x: e.touches[0].clientX - startPosition.x,
+          y: e.touches[0].clientY - startPosition.y,
+        });
+      } else {
+        setPosition({
+          x: e.clientX - startPosition.x,
+          y: e.clientY - startPosition.y,
+        });
+      }
+    },
+    [isDragging, startPosition]
+  );
 
   const handleMouseUp = () => {
     setIsDragging(false);
