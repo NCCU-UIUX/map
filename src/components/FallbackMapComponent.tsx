@@ -1,16 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Map,
-  Flag,
-  Coffee,
-  Users,
-  MapPin,
-  Home,
-  Sun,
-  Waves,
-  Mountain,
-  Trees,
-} from "lucide-react";
+import { Map, Flag, Coffee, Home, Waves, Mountain, Trees } from "lucide-react";
 
 interface FallbackMapProps {
   language: "zh" | "en";
@@ -125,56 +114,7 @@ const FallbackMapComponent: React.FC<FallbackMapProps> = ({
       window.removeEventListener("touchmove", handleGlobalMouseMove);
       window.removeEventListener("touchend", handleGlobalMouseUp);
     };
-  }, [isDragging, startPosition]);
-
-  // 根据参考图像调整点位置
-  const familyRouteDots = [
-    { left: "20%", top: "10%" }, // 镇南宫石妈祖古道入口
-    { left: "30%", top: "20%" }, // 镇南宫
-    { left: "45%", top: "35%" }, // 向天溪阶梯
-    { left: "55%", top: "60%" }, // 加尔默罗圣母圣衣隐修院
-  ];
-
-  // 健行挑战路线的点
-  const hikingRouteDots = [
-    { left: "10%", top: "15%" }, // 大崎岭步道
-    { left: "30%", top: "20%" }, // 镇南宫
-    { left: "45%", top: "35%" }, // 向天溪阶梯
-    { left: "55%", top: "45%" }, // 阿柔洋山
-    { left: "70%", top: "80%" }, // 猴山岳
-  ];
-
-  // 路线上的景点位置
-  const routePoints = [
-    {
-      name:
-        language === "zh"
-          ? "鎮南宮石媽祖古道"
-          : "Zhennan Temple Stone Mazu Trail",
-      left: "10%",
-      top: "10%",
-      type: "start",
-    },
-    {
-      name: language === "zh" ? "鎮南宮" : "Zhennan Temple",
-      left: "25%",
-      top: "25%",
-      type: "temple",
-    },
-    {
-      name: language === "zh" ? "向天溪階梯" : "Xiangtian Creek Stairs",
-      left: "42%",
-      top: "45%",
-      type: "stairs",
-    },
-    {
-      name:
-        language === "zh" ? "加爾默羅聖母聖衣隱修院" : "Carmelite Monastery",
-      left: "55%",
-      top: "70%",
-      type: "monastery",
-    },
-  ];
+  }, [isDragging, startPosition, handleMouseMove]);
 
   // 路线距离和时间标记位置
   const distanceMarkers = [

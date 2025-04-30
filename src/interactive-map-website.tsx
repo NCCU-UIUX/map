@@ -1,16 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Map,
-  Flag,
-  Coffee,
-  Users,
-  MapPin,
-  Home,
-  Sun,
-  Waves,
-  Mountain,
-  Trees,
-} from "lucide-react";
+import { Map, Coffee, Users, Home, Waves, Mountain, Trees } from "lucide-react";
 import FallbackMapComponent from "./components/FallbackMapComponent";
 import EmbeddedGoogleMapComponent from "./components/EmbeddedGoogleMapComponent";
 
@@ -50,7 +39,8 @@ export default function InteractiveMap() {
   const [language, setLanguage] = useState<LanguageKey>("zh"); // 'zh' 中文, 'en' 英文
   const [showFamilyFriendly, setShowFamilyFriendly] = useState(false);
   const [showTrailsOnly, setShowTrailsOnly] = useState(false);
-  const [activeTooltip, setActiveTooltip] = useState<number | null>(null);
+  // 暂时注释掉，但保留，因为这个状态可能在将来会使用
+  // const [activeTooltip, setActiveTooltip] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [useEmbeddedMap, setUseEmbeddedMap] = useState(true); // 更改為默認顯示嵌入式地圖
 
@@ -196,14 +186,15 @@ export default function InteractiveMap() {
     },
   ];
 
-  // 顯示提示框
+  // 顯示提示框 - 这个函数虽然定义了但未被使用
   const handleAttractionHover = (id: number) => {
-    setActiveTooltip(id);
+    // setActiveTooltip(id); 暂时注释掉
+    console.log(`Attraction hover: ${id}`);
   };
 
   // 隱藏提示框
   const handleAttractionLeave = () => {
-    setActiveTooltip(null);
+    // setActiveTooltip(null); 暂时注释掉
   };
 
   // 語言切換
@@ -943,26 +934,20 @@ export default function InteractiveMap() {
                   t.language[language]
                 )}
               </button>
-              <a
-                href="#"
-                className="text-sm text-gray-800 hand-drawn-btn nature px-4 py-1.5"
-              >
+              <button className="text-sm text-gray-800 hand-drawn-btn nature px-4 py-1.5">
                 {language === "zh" ? (
                   <span lang="zh-TW">關於我們</span>
                 ) : (
                   "About Us"
                 )}
-              </a>
-              <a
-                href="#"
-                className="text-sm text-gray-800 hand-drawn-btn nature px-4 py-1.5"
-              >
+              </button>
+              <button className="text-sm text-gray-800 hand-drawn-btn nature px-4 py-1.5">
                 {language === "zh" ? (
                   <span lang="zh-TW">聯絡資訊</span>
                 ) : (
                   "Contact"
                 )}
-              </a>
+              </button>
             </div>
 
             <div
