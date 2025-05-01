@@ -1,12 +1,29 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import InteractiveMap from "./interactive-map-website";
+import { AppProvider } from "./context/AppContext";
+import MainLayout from "./layouts/MainLayout";
+import HomePage from "./pages/HomePage";
+import MapPage from "./pages/MapPage";
+import TrailsPage from "./pages/TrailsPage";
+import AttractionsPage from "./pages/AttractionsPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
-    <div className="App">
-      <InteractiveMap />
-    </div>
+    <AppProvider>
+      <Router>
+        <MainLayout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/map" element={<MapPage />} />
+            <Route path="/trails" element={<TrailsPage />} />
+            <Route path="/attractions" element={<AttractionsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </MainLayout>
+      </Router>
+    </AppProvider>
   );
 }
 
