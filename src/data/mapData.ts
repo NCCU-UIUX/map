@@ -25,6 +25,25 @@ export const trails: Trail[] = [
       { lat: 24.997, lng: 121.621 }, // 鎮南宮石媽祖古道
       { lat: 24.995, lng: 121.625 }, // 加爾默羅聖母聖衣隱修院
     ],
+    teaGardens: [
+      {
+        id: 1,
+        name: {
+          zh: "阿柔坑茶園",
+          en: "Arouken Tea Garden"
+        },
+        description: {
+          zh: "阿柔坑茶園位於深坑區東南方，海拔約300公尺，擁有絕佳的地理環境和氣候條件，是生產優質包種茶的理想場所。茶園依山勢而建，層層梯田形成獨特景觀。這裡的茶樹品種主要為青心烏龍，經過細心栽培和傳統製茶工藝，產出的茶葉香氣高雅，滋味甘醇，是深坑包種茶的代表之一。",
+          en: "Arouken Tea Garden is located in the southeast of Shenkeng District at an altitude of about 300 meters. It has excellent geographical environment and climate conditions, making it an ideal place for producing high-quality Pouchong tea. The tea garden is built along the mountainside, forming unique terraced landscapes. The tea trees here are mainly Qingxin Oolong varieties. Through careful cultivation and traditional tea-making techniques, the tea produced has an elegant aroma and a mellow taste, representing one of Shenkeng's finest Pouchong teas."
+        },
+        teaTypes: ["包種茶", "烏龍茶"],
+        location: { lat: 24.998, lng: 121.622 }
+      }
+    ],
+    story: {
+      zh: "深坑茶葉的歷史可追溯至清朝時期，當時福建安溪茶農帶著製茶技術來到台灣，在深坑一帶開始種植茶樹。由於當地氣候溫和多雨，土壤肥沃，非常適合茶樹生長，逐漸發展出獨特的深坑包種茶。在日治時期，深坑茶業達到鼎盛，成為台灣重要的茶葉產區之一。這條親子輕鬆探索路線不僅能欣賞自然風光，還能了解深坑茶文化的發展歷程，感受茶香與人文的完美結合。",
+      en: "The history of Shenkeng tea can be traced back to the Qing Dynasty when tea farmers from Anxi, Fujian brought tea-making techniques to Taiwan and began planting tea trees in the Shenkeng area. Due to the mild and rainy climate and fertile soil, the area was very suitable for tea tree growth, gradually developing the unique Shenkeng Pouchong tea. During the Japanese colonial period, Shenkeng's tea industry reached its peak, becoming one of Taiwan's important tea-producing areas. This family-friendly exploration route not only offers natural scenery but also provides insights into the development of Shenkeng's tea culture, allowing visitors to experience the perfect combination of tea fragrance and cultural heritage."
+    }
   },
   {
     id: 2,
@@ -44,6 +63,39 @@ export const trails: Trail[] = [
       { lat: 24.993, lng: 121.628 }, // 阿柔洋山
       { lat: 24.99, lng: 121.632 }, // 猴山岳
     ],
+    teaGardens: [
+      {
+        id: 2,
+        name: {
+          zh: "猴山古茶園",
+          en: "Monkey Mountain Ancient Tea Garden"
+        },
+        description: {
+          zh: "猴山古茶園位於深坑區猴山岳附近，海拔約500公尺，是深坑區最古老的茶園之一，有超過百年歷史的古茶樹。這裡的茶樹主要為青心烏龍和金萬錦品種，由於海拔較高，早晨常被雲霧籠罩，造就了獨特的微氣候環境，生產的茶葉香氣深邃，味道獨特，被茶客賞識為「霧中風韻」。",
+          en: "Monkey Mountain Ancient Tea Garden is located near Monkey Mountain in Shenkeng District at an altitude of about 500 meters. It is one of the oldest tea gardens in Shenkeng with tea trees over a hundred years old. The tea trees here are mainly Qingxin Oolong and Jin Wanjin varieties. Due to its higher altitude, the area is often shrouded in mist in the early morning, creating a unique microclimate environment. The tea produced here has a deep aroma and distinctive taste, appreciated by tea connoisseurs as 'Whispers in the Mist'."
+        },
+        teaTypes: ["高山烏龍", "老欉茶"],
+        location: { lat: 24.991, lng: 121.630 }
+      },
+      {
+        id: 3,
+        name: {
+          zh: "天水堂茶園",
+          en: "Tianshui Hall Tea Garden"
+        },
+        description: {
+          zh: "天水堂茶園位於阿柔洋山腳下，是一家有機茶園，堅持不使用化學肥料和農藥，遵循自然耕作方式。茶園主人張先生是第三代茶農，續承家族傳統製茶技術，並結合現代科技，發展出獨特的發酵茶。茶園附設品茶室，遊客可預約體驗製茶遊程，親手採茶、揚茶、品茶，感受深坑茶文化的魅力。",
+          en: "Tianshui Hall Tea Garden is located at the foot of Arouyang Mountain and is an organic tea garden that insists on not using chemical fertilizers and pesticides, following natural farming methods. The garden owner, Mr. Zhang, is a third-generation tea farmer who continues his family's traditional tea-making techniques while incorporating modern technology to develop unique fermented teas. The tea garden has a tea tasting room where visitors can book tea-making experience tours, pick tea leaves by hand, process tea, and taste tea, experiencing the charm of Shenkeng's tea culture."
+        },
+        teaTypes: ["有機包種茶", "發酵茶"],
+        location: { lat: 24.994, lng: 121.626 },
+        imageUrl: "https://example.com/tianshui-tea-garden.jpg"
+      }
+    ],
+    story: {
+      zh: "深坑的茶葉文化與登山健行文化緊密相連。早期茶農為了開闢茶園，在山區開闢小徑，這些小徑逐漸發展成為今日的登山步道。此健行挑戰路線稱為「茶香古道」，沿路可見百年茶樹和古老製茶工具遺跡。每年春季，當茶樹開花時，整個山區彼漸彩色花瓣，小白花香氣撲人，吸引著茶香愛好者和健行者前來探訪。走過這條古道，不僅能欣賞壯闊的自然風光，還能感受到深坑茶業的歷史與文化底蘊。",
+      en: "Shenkeng's tea culture is closely linked to its mountain hiking culture. In the early days, tea farmers opened up small paths in the mountains to develop tea gardens, which gradually evolved into today's hiking trails. This hiking challenge route is known as the 'Tea Fragrance Ancient Trail', along which you can see century-old tea trees and relics of ancient tea-making tools. Every spring, when the tea trees bloom, the entire mountain area is dotted with colorful flowers, and the fragrance of small white flowers is captivating, attracting tea enthusiasts and hikers. Walking along this ancient trail, you can not only enjoy the magnificent natural scenery but also feel the historical and cultural heritage of Shenkeng's tea industry."
+    }
   },
 ];
 

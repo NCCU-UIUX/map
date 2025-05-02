@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { trails } from '../data/mapData';
-import { Mountain, Coffee } from 'lucide-react';
+import { Mountain, Coffee, Leaf, History, MapPin } from 'lucide-react';
 
 const TrailsPage: React.FC = () => {
   const { language } = useAppContext();
+  const [expandedTrail, setExpandedTrail] = useState<number | null>(null);
+  
+  const toggleTrailExpand = (trailId: number) => {
+    if (expandedTrail === trailId) {
+      setExpandedTrail(null);
+    } else {
+      setExpandedTrail(trailId);
+    }
+  };
 
   return (
     <div className="bg-gradient-to-b from-white to-nature-green/5">
@@ -33,19 +42,19 @@ const TrailsPage: React.FC = () => {
               className="bg-white rounded-lg shadow-md overflow-hidden hand-drawn-card"
             >
               <div className="p-6">
-                <div className="flex items-center mb-4">
+                <div className="flex flex-wrap items-center mb-4">
                   <div 
-                    className="w-12 h-12 rounded-full flex items-center justify-center mr-4"
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center mr-3 md:mr-4"
                     style={{ backgroundColor: trail.color }}
                   >
                     {trail.familyFriendly ? (
-                      <Coffee className="text-white w-6 h-6" />
+                      <Coffee className="text-white w-5 h-5 md:w-6 md:h-6" />
                     ) : (
-                      <Mountain className="text-white w-6 h-6" />
+                      <Mountain className="text-white w-5 h-5 md:w-6 md:h-6" />
                     )}
                   </div>
-                  <div>
-                    <h2 className="text-2xl font-semibold">
+                  <div className="flex-1 min-w-0">
+                    <h2 className="text-xl md:text-2xl font-semibold truncate">
                       {language === "zh" ? trail.name.zh : trail.name.en}
                     </h2>
                     {trail.familyFriendly && (
@@ -56,7 +65,7 @@ const TrailsPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mb-6">
                   <div className="bg-gray-100 p-4 rounded-lg">
                     <h3 className="text-sm text-gray-500 mb-1">
                       {language === "zh" ? "難度" : "Difficulty"}
@@ -97,7 +106,76 @@ const TrailsPage: React.FC = () => {
                   </p>
                 </div>
                 
-                <div className="flex justify-between items-center">
+                {trail.story && (
+                  <div className="mb-6 bg-earth-gray/10 p-4 rounded-lg">
+                    <div className="flex items-center mb-2">
+                      <History className="w-5 h-5 text-cta-orange mr-2" />
+                      <h3 className="text-lg font-semibold">
+                        {language === "zh" ? "步道故事" : "Trail Story"}
+                      </h3>
+                    </div>
+                    <p className="text-gray-700">
+                      {language === "zh" ? trail.story.zh : trail.story.en}
+                    </p>
+                  </div>
+                )}
+                
+                {trail.teaGardens && trail.teaGardens.length > 0 && (
+                  <div className="mb-6">
+                    <div className="flex flex-wrap items-center justify-between mb-3">
+                      <div className="flex items-center mb-2 md:mb-0">
+                        <Leaf className="w-5 h-5 text-nature-green mr-2 flex-shrink-0" />
+                        <h3 className="text-lg font-semibold truncate">
+                          {language === "zh" ? "沿途茶園" : "Tea Gardens Along the Trail"}
+                        </h3>
+                      </div>
+                      <button 
+                        onClick={() => toggleTrailExpand(trail.id)}
+                        className="text-sm text-cta-orange hover:underline px-2 py-1"
+                      >
+                        {expandedTrail === trail.id ? 
+                          (language === "zh" ? "收起詳情" : "Hide Details") : 
+                          (language === "zh" ? "查看詳情" : "View Details")}
+                      </button>
+                    </div>
+                    
+                    <div className={`grid grid-cols-1 gap-4 ${expandedTrail === trail.id ? 'block' : 'hidden'}`}>
+                      {trail.teaGardens.map(garden => (
+                        <div key={garden.id} className="bg-white p-4 rounded-lg shadow-sm border border-nature-green/30">
+                          <div className="flex items-center mb-2">
+                            <MapPin className="w-4 h-4 text-nature-green mr-2" />
+                            <h4 className="font-semibold">
+                              {language === "zh" ? garden.name.zh : garden.name.en}
+                            </h4>
+                          </div>
+                          <p className="text-sm text-gray-700 mb-2">
+                            {language === "zh" ? garden.description.zh : garden.description.en}
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {garden.teaTypes.map((teaType, index) => (
+                              <span 
+                                key={index} 
+                                className="inline-block bg-sun-yellow/30 text-xs px-2 py-1 rounded-full"
+                              >
+                                {teaType}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {expandedTrail !== trail.id && (
+                      <div className="text-sm text-gray-600">
+                        {language === "zh" ? 
+                          `此路線上有 ${trail.teaGardens.length} 個茶園可供參觀` : 
+                          `There are ${trail.teaGardens.length} tea gardens to visit along this route`}
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                <div className="flex flex-wrap justify-between items-center gap-3">
                   <div className="text-sm text-gray-500">
                     {language === "zh" ? (
                       <span lang="zh-TW">適合季節: 全年</span>
@@ -110,7 +188,7 @@ const TrailsPage: React.FC = () => {
                     href={trail.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-cta-orange text-white rounded-lg hand-drawn-btn hover:bg-opacity-90 transition-colors"
+                    className="px-3 py-2 md:px-4 text-sm md:text-base bg-cta-orange text-white rounded-lg hand-drawn-btn hover:bg-opacity-90 transition-colors"
                   >
                     {language === "zh" ? (
                       <span lang="zh-TW">在 Google 地圖查看</span>

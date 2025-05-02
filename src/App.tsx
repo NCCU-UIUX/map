@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import MapPage from "./pages/MapPage";
 import TrailsPage from "./pages/TrailsPage";
 import AttractionsPage from "./pages/AttractionsPage";
+import GameCheckInPage from "./pages/GameCheckInPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/map" element={<MapPage />} />
             <Route path="/trails" element={<TrailsPage />} />
             <Route path="/attractions" element={<AttractionsPage />} />
+            <Route path="/game-checkin" element={<GameCheckInPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </MainLayout>

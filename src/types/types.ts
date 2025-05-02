@@ -15,6 +15,17 @@ export interface Trail {
   difficulty: string;
   distance: string;
   time: string;
+  teaGardens?: TeaGarden[];
+  story?: { zh: string; en: string };
+}
+
+export interface TeaGarden {
+  id: number;
+  name: { zh: string; en: string };
+  description: { zh: string; en: string };
+  teaTypes: string[];
+  location: TrailCoordinate;
+  imageUrl?: string;
 }
 
 export interface Attraction {
